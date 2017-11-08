@@ -1,33 +1,54 @@
 {
-  "name": "pty.js",
-  "description": "Pseudo terminals for node.",
-  "author": "Christopher Jeffrey",
-  "version": "0.3.1",
+  "name": "node-pty",
+  "description": "Fork pseudoterminals in Node.JS",
+  "author": {
+    "name": "Daniel Imms"
+  },
+  "version": "0.7.2",
   "license": "MIT",
-  "main": "./index.js",
-  "repository": "git://github.com/chjj/pty.js.git",
-  "homepage": "https://github.com/chjj/pty.js",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Tyriar/node-pty.git"
+  },
+  "files": [
+    "binding.gyp",
+    "lib/",
+    "scripts/",
+    "src/",
+    "deps/"
+  ],
+  "homepage": "https://github.com/Tyriar/node-pty",
   "bugs": {
-    "url": "https://github.com/chjj/pty.js/issues"
+    "url": "https://github.com/Tyriar/node-pty/issues"
   },
   "keywords": [
     "pty",
     "tty",
-    "terminal"
+    "terminal",
+    "pseudoterminal",
+    "forkpty",
+    "openpty"
   ],
   "scripts": {
-    "test": "NODE_ENV=test mocha -R spec"
+    "tsc": "tsc",
+    "tslint": "tslint src/**/*.ts",
+    "install": "node scripts/install.js",
+    "postinstall": "node scripts/post-install.js",
+    "test": "cross-env NODE_ENV=test mocha -R spec lib/*.test.js",
+    "prepublish": "npm run tsc"
   },
-  "tags": [
-    "pty",
-    "tty",
-    "terminal"
-  ],
   "dependencies": {
-    "extend": "~3.0.0",
-    "nan": "2.6.2"
+    "nan": "^2.6.2"
   },
   "devDependencies": {
-    "mocha": "~3.2.0"
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^6.0.58",
+    "cross-env": "^3.2.4",
+    "mocha": "^3.1.2",
+    "pollUntil": "^1.0.3",
+    "tslint": "^4.3.1",
+    "typescript": "^2.1.4"
   }
 }

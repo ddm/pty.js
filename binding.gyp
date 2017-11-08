@@ -9,14 +9,15 @@
         # "I disabled those warnings because of winpty" - @peters (GH-40)
         'msvs_disabled_warnings': [ 4506, 4530 ],
         'include_dirs' : [
-          'deps/winpty/include',
+          'deps/winpty/src/include',
         ],
         'dependencies' : [
-          'deps/winpty/winpty.gyp:winpty-agent',
-          'deps/winpty/winpty.gyp:winpty',
+          'deps/winpty/src/winpty.gyp:winpty-agent',
+          'deps/winpty/src/winpty.gyp:winpty',
         ],
         'sources' : [
-          'src/win/pty.cc'
+          'src/win/pty.cc',
+          'src/win/path_util.cc'
         ],
         'libraries': [
           'shlwapi.lib'
@@ -39,6 +40,18 @@
           '-lutil'
         ]
       }],
+      ['OS=="mac"', {
+        "xcode_settings": {
+          "OTHER_CPLUSPLUSFLAGS": [
+            "-std=c++11",
+            "-stdlib=libc++"
+          ],
+          "OTHER_LDFLAGS": [
+            "-stdlib=libc++"
+          ],
+          "MACOSX_DEPLOYMENT_TARGET":"10.7"
+        }
+      }]
     ]
   }]
 }
